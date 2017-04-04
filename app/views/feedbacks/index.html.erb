@@ -1,0 +1,20 @@
+<% @product.each do |product| %>
+<div class="row">
+<div class="col-md-5">
+<%= product.name %>
+<%= product.price %>
+<%= product.description %>
+<%= image_tag(product.image, size: "192x200") %>
+<%= link_to "submit feedback", new_feedback_path(product) %>
+</div>
+<div class="col-md-7">
+<ul>
+<% unless product.comments.count == 0  %>
+<% product.comments.each do |comment| %>
+<li><%= comment.feedback %></li>
+<% end %>
+<% end %>
+</ul>
+</div>
+</div>
+<% end %>

@@ -4,6 +4,7 @@
 <div class="main">
 <%= render 'carousel'%>
 <div class="row col-md-5 col-md-offset-7">
+      <a href="<%= feedbacks_path%>">Feedback</a>
       <span class="label label-primary" style="font-size: 20px;">Sort By </span>
       <%=sortable "name" %>
       <%=sortable "price" %>
@@ -75,7 +76,7 @@
           <div class="container">
             <h1>Your Cart Is Empty</h1>
           </div>
-        <%end%>
+        <%end%> 
       </div>
 
 
