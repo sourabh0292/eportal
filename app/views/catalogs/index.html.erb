@@ -1,0 +1,93 @@
+<% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
+<div class="main">
+<%= render 'carousel'%>
+<div class="row col-md-5 col-md-offset-7">
+      <span class="label label-primary" style="font-size: 20px;">Sort By </span>
+      <%=sortable "name" %>
+      <%=sortable "price" %>
+      <button class="cart_button btn btn-primary" type="button" style="float: right;" data-toggle="modal"   data-target="#cart">
+    Cart <span class="badge"><%=@cart.count%></span>
+      </button>
+</div>
+  <div class="row">
+    <div class="col-md-3">
+        <span class="label label-primary">Select Category </span>
+       <div div class="btn-group-vertical" role="group">
+        <%=category_sort "all" %>
+        <%=category_sort "shoes" %>
+        <%=category_sort "books" %>
+        <%=category_sort "jackets" %>
+        <%=category_sort "watches" %>
+        <%=category_sort "shirts" %>
+        <%=category_sort "headphones"%>
+       </div>
+    </div>
+    <div class="col-md-9" id="products_partial">
+      <%= render @products %>
+      <%= will_paginate @products, renderer: BootstrapPagination::Rails %>
+    </div>
+  </div>
+<div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h2 class="modal-title" id="myModalLabel">Cart</h2>
+      </div>
+
+      <div class="modal-body">
+      <% if @cart.count > 0%>
+      <div id="table">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Image</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Total Price</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+          <% @cart.line_items.each do |item| %>
+            <tr>
+              <td><%= item.product.name %></td>
+              <td><%= item.product.description %></td>
+              <td><%= image_tag(item.product.image, :width => "140", :alt => "rss feed") %></td>
+              <td><%= number_to_currency(item.product.price) %></td>
+              <td><%= item.quantity%></td>
+              <td><%=number_to_currency(item.product.price)%></td>
+            </tr>
+
+
+          <% end %>
+            <td>Amount To Be Paid</td>
+            <td class="amount"><%=number_to_currency(@cart.price)%></td>
+          </tbody>
+        </table>
+        </div>
+        <%else%>
+          <div class="container">
+            <h1>Your Cart Is Empty</h1>
+          </div>
+        <%end%>
+      </div>
+
+
+      <div class="modal-footer">
+      <button type="button" class="btn btn-default" id="remove_items">
+      <%=link_to 'Clear Cart', cart_path(@cart), method: :delete%>
+      </button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Continue Shopping</button>
+        <a href="<%= new_order_path%>", class: "btn-default" >Checkout</a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+  
