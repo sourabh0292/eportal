@@ -15,7 +15,7 @@ class FeedbacksController < ApplicationController
 
 	def create
 		feedback = Comment.new(params.require(:comment).permit(:feedback, :product_id))	
-		if feedback.save
+		if feedback.save 
 			redirect_to feedbacks_path
 			else
 			redirect_to new_feedback_path(feedback.product_id)	

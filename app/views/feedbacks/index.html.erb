@@ -7,15 +7,31 @@
 <%= image_tag(product.image, size: "192x200") %>
 <%= link_to "submit feedback", new_feedback_path(product) %>
 </div>
-<div class="col-md-7">
+<div class="col-md-3">
 <ul>
 <% unless product.comments.count == 0  %>
 <% product.comments.each do |comment| %>
-<li><%= comment.feedback %></li>
+<li><%= comment.feedback %><br>
+Sentiment:<b><%= comment.sentiment.capitalize %></b>
+Score: <b><%= comment.score %></li></b>
 <%= link_to 'Delete', feedback_path(comment), method: :delete %> 
 <% end %>
 <% end %>
 </ul>
+</div>
+<div class="col-md-4">
+<table width="400">
+<tr>
+<th> Positive </th>
+<th> Negative </th>
+<th>Neutral </th>
+</tr>
+<tbody>
+<td><%= product.comments.where(sentiment: "positive").count %></td>
+<td><%= product.comments.where(sentiment: "negative").count %></td>
+<td><%= product.comments.where(sentiment: "neutral").count %></td>
+</tbody>
+</table>
 </div>
 </div>
 <% end %>
