@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 resources :carts, only: :destroy
   resources :orders, only: [:new, :create, :show]
   resources :line_items, only: [:create, :destroy]
-  resources :feedbacks, only: [:index, :new, :create]
+  resources :feedbacks, only: [:index, :new, :create, :destroy]
 
 root "catalogs#index"
 get 'catalogs/index'

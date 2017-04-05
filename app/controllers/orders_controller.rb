@@ -11,7 +11,7 @@ class OrdersController < ApplicationController
     #product = []
     #@cart.line_items.each {|item| product << {product_id: item.product.id, quantity: item.quantity}}
     #@order.product = product.to_json
-    debugger
+    
     if @order.save
       @cart.destroy
       session[:cart_id] = nil

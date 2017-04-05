@@ -1,0 +1,10 @@
+<%= form_for @feedback, url: feedbacks_path do |f|%>
+<%= f.hidden_field :product_id, value: @feedback.product_id %>
+ <div class="field">
+    <%= f.label :feedback %>
+    <%= f.text_field :feedback %> 
+  </div>
+  <div class="actions">
+    <%= f.submit %> 
+  </div>
+<% end %>

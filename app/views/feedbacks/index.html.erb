@@ -12,6 +12,7 @@
 <% unless product.comments.count == 0  %>
 <% product.comments.each do |comment| %>
 <li><%= comment.feedback %></li>
+<%= link_to 'Delete', feedback_path(comment), method: :delete %> 
 <% end %>
 <% end %>
 </ul>
