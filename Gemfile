@@ -7,6 +7,7 @@ end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails_12factor', group: :production
+# will be adding ruby version gem
 
 gem 'devise'
 gem 'faker'
